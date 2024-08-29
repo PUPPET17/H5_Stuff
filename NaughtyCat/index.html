@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Random Image Display</title>
+  <style>
+    body {
+      background-color: #a83232;
+      /* 设置你想要的背景颜色 */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .image-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .image-container img {
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .rectangle {
+      text-align: center;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 250px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      padding-left: 20px;
+      padding-right: 20px;
+      max-height: 70px;
+      border: 2px solid #727272;
+      background: #447f20;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+      /* 0.5秒的过渡效果 */
+      pointer-events: none;
+      /* 防止点击穿透 */
+    }
+
+    .hidden {
+      display: none;
+      /* 隐藏元素 */
+    }
+
+    .visible {
+      opacity: 1;
+      /* 显示元素，完全可见 */
+    }
+
+    .text {
+      color: antiquewhite;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+      font-size: medium;
+    }
+
+    .imageSrc1 {
+      /* width: 12%;
+        height: 12%; */
+      object-fit: cover;
+    }
+
+    .imageSrc2 {
+      /* width: 12%;
+        height: 12%; */
+      object-fit: cover;
+    }
+
+    .imageSrc3 {
+      /* width: 12%;
+        height: 12%; */
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="image-container">
+    <div class="rectangle">
+      merry christmas!
+    </div>
+    <img class="imageSrc1" src="./catPic/三花.png" alt="Image" />
+    <img class="imageSrc2" src="./catPic/银1.png" alt="Image" />
+    <img class="imageSrc3" src="./catPic/黑1.png" alt="Image" />
+  </div>
+
+  <script>
+    window.onload = function () {
+      const images = document.querySelectorAll('.image-container img');
+      const imageSources = [imageSources1, imageSources2, imageSources3];
+
+      images.forEach((image, index) => {
+        setImagePosition(image, images);
+        image.addEventListener('click', () => {
+          changeImage(image, imageSources[index]);
+          showRectangle(image);
+        });
+      });
+    }
+
+    let showTimer; // 用于存储显示定时器的引用
+    let hideTimer; // 用于存储隐藏定时器的引用
+    const rectangle = document.querySelector('.rectangle');
+    let isShowing = false; // 用于跟踪是否正在显示
+
+    const imageSources1 = [
+      './catPic/三花.png',
+      './catPic/三花1.png',
+      './catPic/三花2.png',
+      './catPic/三花3.png',
+      './catPic/猫抓老鼠.png',
+      './catPic/三花4.png',
+      './catPic/三花5.png',
+      './catPic/三花6.png'
+    ];
+    const imageSources2 = [
+      './catPic/银1.png',
+      './catPic/银2.png',
+      './catPic/银3.png',
+      './catPic/银4.png',
+      './catPic/银5.png',
+      './catPic/银6.png'
+    ];
+    const imageSources3 = [
+      './catPic/黑1.png',
+      './catPic/黑2.png',
+      './catPic/黑3.png',
+      './catPic/黑4.png',
+      './catPic/黑5.png',
+      './catPic/黑6.png',
+      './catPic/黑7.png',
+      './catPic/黑8.png'
+    ];
+
+    function changeImage(image, imageSources) {
+      const randomIndex = Math.floor(Math.random() * imageSources.length);
+
+      const newImageSource = imageSources[randomIndex];
+      image.src = newImageSource;
+
+      setImagePosition(image, document.querySelectorAll('.image-container img'));
+    }
+
+    function setImagePosition(image, images) {
+      const width = document.documentElement.clientWidth;
+      const height = document.documentElement.clientHeight;
+      const imgWidth = image.clientWidth;
+      const imgHeight = image.clientHeight;
+
+      let randomX, randomY, overlap;
+
+      do {
+        randomX = Math.random() * (width - imgWidth);
+        randomY = Math.random() * (height - imgHeight);
+
+        image.style.top = randomY + 'px';
+        image.style.left = randomX + 'px';
+
+        overlap = checkOverlap(image, images);
+      } while (overlap);
+    }
+
+    function checkOverlap(image, images) {
+      const rect1 = image.getBoundingClientRect();
+      const elements = [...images, rectangle]; // Include the rectangle in the collision check
+
+      return elements.some((el) => {
+        if (el === image || el.classList.contains('hidden')) return false;
+
+        const rect2 = el.getBoundingClientRect();
+
+        return !(
+          rect1.right < rect2.left ||
+          rect1.left > rect2.right ||
+          rect1.bottom < rect2.top ||
+          rect1.top > rect2.bottom
+        );
+      });
+    }
+
+    function showRectangle(image) {
+      // 获取图片的位置和大小
+      const rect = image.getBoundingClientRect();
+
+      // 设置rectangle的位置，使其围绕图片
+      rectangle.style.top = rect.top + window.scrollY + 'px';
+      rectangle.style.left = rect.left + window.scrollX + 'px';
+      rectangle.style.width = rect.width + 'px';
+      rectangle.style.height = rect.height + 'px';
+
+      // 显示rectangle
+      rectangle.classList.remove('hidden');
+      rectangle.classList.add('visible');
+
+      // 2秒后隐藏rectangle
+      if (showTimer) {
+        clearTimeout(showTimer);
+      }
+      if (hideTimer) {
+        clearTimeout(hideTimer);
+      }
+      hideTimer = setTimeout(function () {
+        rectangle.classList.remove('visible');
+        rectangle.classList.add('hidden');
+      }, 2000);
+    }
+  </script>
+</body>
+
+</html>

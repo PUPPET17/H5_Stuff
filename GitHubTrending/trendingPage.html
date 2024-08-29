@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Trending Mockup</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            width: 95%;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 10px;
+            box-shadow: 5px 5px 0px #000;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff4136;
+            font-size: 2.5em;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 0px #000;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 0 auto 20px;
+            padding: 10px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            background: #f0f0f0;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 3px 3px 0px #000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 5px 5px 0px #000;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #000;
+            font-size: 0.9em;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0px #000;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e9e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+        a {
+            color: #0074d9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #ff4136;
+            text-decoration: underline;
+        }
+
+        small {
+            color: #666;
+            font-style: italic;
+        }
+
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+            color: #000;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 3px 3px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .pagination button:disabled {
+            background-color: #d3d3d3;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* 确保 description 列的文字能够完整显示 */
+        td {
+            word-wrap: break-word;
+            max-width: 300px; /* 增加最大宽度 */
+        }
+
+        /* 移除之前的 td.description 样式，因为我们希望完整显示内容 */
+
+        /* 当表格溢出时添加滚动条 */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            min-width: 100%;
+            white-space: normal; /* 允许文字换行 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GitHub Trending</h1>
+        <input type="file" id="file-input" accept=".csv">
+        <table id="trending-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Repository</th>
+                    <th>Stars</th>
+                    <th>Forks</th>
+                    <th>Language</th>
+                    <th>Issues</th>
+                    <th>Last Commit</th>
+                    <th>Description</th>
+                </tr>
+            </thead>            
+            <tbody>
+            </tbody>
+        </table>
+        
+        <div class="pagination">
+            <button id="prev-btn" disabled>Previous</button>
+            <span id="page-info"></span>
+            <button id="next-btn">Next</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!--
+ * @Author: PUPPET17 HERO768BNFV@gmail.com
+ * @Date: 2024-02-14 20:34:40
+ * @LastEditors: PUPPET17 HERO768BNFV@gmail.com
+ * @LastEditTime: 2024-02-14 23:36:30
+ * @FilePath: \ThreeJSLearing\cube.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Three.js 3D Scene with Mouse-controlled Rotation</title>
+    <style>
+        /* 定义容器的大小 */
+        #container {
+            width: 800px;
+            height: 600px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 30px; /* 添加圆角 */
+            overflow: hidden; /* 防止边缘部分溢出 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 用于容纳Three.js场景的div容器 -->
+    <div id="container"></div>
+
+    <!-- 引入Three.js库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(30, 800 / 600, 0.1, 1000);
+
+        var renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(800, 600);
+        document.getElementById('container').appendChild(renderer.domElement);
+
+        var geometry = new THREE.BoxGeometry(0.9,0.9,0.9);
+        var material = new THREE.MeshBasicMaterial({color: 0x666699});
+        var cube = new THREE.Mesh(geometry, material);
+        scene.add( cube );
+
+        var edges = new THREE.EdgesGeometry(geometry);
+        var lineMaterial = new THREE.LineBasicMaterial({color: 0xffffff});
+        var wireframe = new THREE.LineSegments(edges, lineMaterial);
+        cube.add( wireframe );
+
+        var geometry2 = new THREE.BoxGeometry(1.3,1.3,1.3);
+        var wireframe2 = new THREE.WireframeGeometry( geometry2 );
+        var line = new THREE.LineSegments( wireframe2,lineMaterial );
+        line.material.depthTest = true;
+        line.material.transparent = true;
+        cube.add( line );
+
+        camera.position.z = 5;
+
+        // Mouse position
+        var mouse = new THREE.Vector2();
+        // 更新鼠标位置
+        function onMouseMove(event) {
+            // 将鼠标位置转换为归一化设备坐标（NDC）
+            mouse.x = -(event.clientX / window.innerWidth) * 7 - 1;
+            mouse.y = (event.clientY / window.innerHeight) * 7 + 1;
+
+            // 更新立方体的旋转
+            cube.rotation.x = mouse.y;
+            cube.rotation.y = mouse.x;
+        }
+        // 侦听鼠标移动事件
+        window.addEventListener('mousemove', onMouseMove, false);
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        animate(); 
+
+        // 窗口调整尺寸的事件监听
+        window.addEventListener('resize', function(){
+            var container = document.getElementById('container');
+            var width = container.clientWidth;
+            var height = container.clientHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+    </script>
+</body>
+</html>

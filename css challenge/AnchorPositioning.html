@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+    
+    body, html {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    p {
+        margin: auto;
+    }
+
+    p {
+        position: relative;
+        width: 400px;
+        font-size: 18px;
+        line-height: 1.5;
+        text-align: justify;
+        resize: horizontal;
+        
+        span {
+            color: deeppink;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        &::before,
+        &::after {
+            position: absolute;
+            transition: 0;
+            opacity: 0;
+        }
+        
+        &::before {
+            content: "";
+            top: calc(anchor(var(--target) top) + 10px);
+            left: calc(anchor(var(--target) left) + 5px);
+            border: 8px solid transparent;
+            border-bottom: 8px solid #000;
+        }
+        &::after {
+            content: "Alert Tips!";
+            width: 80px;
+            padding: 2px 4px;
+            font-size: 14px;
+            background: #fff;
+            border: 2px solid #000;
+            top: calc(anchor(var(--target) top) + 24px);
+            left: anchor(var(--target) left);
+            right: anchor(var(--target) right);
+        }
+    }
+
+    p:has(span:nth-child(1):hover) {
+        --target: --anchor-1;
+    }
+    p span:nth-child(1) {
+        anchor-name: --anchor-1;
+    }
+    p:has(span:nth-child(2):hover) {
+        --target: --anchor-2;
+    }
+    p span:nth-child(2) {
+        anchor-name: --anchor-2;
+    }
+    p:has(span:nth-child(3):hover) {
+        --target: --anchor-3;
+    }
+    p span:nth-child(3) {
+        anchor-name: --anchor-3;
+    }
+    p:has(span:nth-child(4):hover) {
+        --target: --anchor-4;
+    }
+    p span:nth-child(4) {
+        anchor-name: --anchor-4;
+    }
+
+    p:has(span:hover)::before,
+    p:has(span:hover)::after{
+        transition: .3s all;
+        opacity: 1;
+    }
+
+
+    @for $i from 1 to 5 {
+        p:has(span:nth-child(#{$i}):hover) {
+            --target: --anchor-#{$i};
+        }
+        p span:nth-child(#{$i}) {
+            anchor-name: --anchor-#{$i};
+        }
+    }
+
+</style>
+</head>
+<body>
+
+    <p class="g-container">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, porro, <span>facere</span>, et incidunt error aliquam fugit pariatur eos labore ipsum voluptate magni culpa reiciendis optio at accusantium non! Quis, laboriosam.
+        Lorem ipsum dolor sit, <span>amet consectetur</span> adipisicing elit. Error commodi sequi perspiciatis ipsa veniam, aut, aliquam maiores quasi <span>adipisci tenetur </span>reiciendis dolor nihil aperiam labore, sunt qui ullam aspernatur <span>voluptate</span>.
+    </p>
+    
+</body>
+</html>

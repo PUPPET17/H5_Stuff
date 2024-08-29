@@ -1,0 +1,64 @@
+<!--
+ * @Author: PUPPET17 HERO768BNFV@gmail.com
+ * @Date: 2024-04-05 23:23:54
+ * @LastEditors: PUPPET17 HERO768BNFV@gmail.com
+ * @LastEditTime: 2024-04-06 02:50:50
+ * @FilePath: \debt\debt.html
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>分期债务计算器</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h2>分期债务计算器</h2>
+    <div class="input-group">
+      <div>
+        <label for="amount">债务总金额:</label>
+        <input type="number" id="amount" placeholder="输入债务金额">
+      </div>
+      <div>
+        <label for="months">分期总月数:</label>
+        <input type="number" id="months" placeholder="输入分期月数">
+      </div>
+      <div>
+        <label for="startDate">开始日期:</label>
+        <input type="text" id="startDate" placeholder="选择开始日期">
+      </div>
+    </div>
+    <button onclick="addDebt()">添加债务</button>
+    <div id="debtList">
+    </div>
+    <div class="input-group">
+      <div>
+        <label for="specificYear">年份:</label>
+        <input type="number" id="specificYear" placeholder="年份">
+      </div>
+      <div>
+        <label for="specificMonth">月份:</label>
+        <input type="number" id="specificMonth" placeholder="月份">
+      </div>
+      <div>
+        <button
+          onclick="calculateDebtForSpecificMonth(document.getElementById('specificYear').value, document.getElementById('specificMonth').value)">计算特定月份债务</button>
+      </div>
+    </div>
+
+    <div class="export-import-buttons">
+      <button onclick="exportToJsonFile()">导出债务信息</button>
+      <button onclick="importFromJsonFile()">导入债务信息</button>
+    </div>
+
+    <input type="file" id="fileInput" style="display: none;" onchange="handleFileUpload(event)">
+  </div>
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>音乐播放器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffcdaa;
+            text-align: center;
+            padding: 50px;
+        }
+
+        audio {
+            width: 400px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background-color: #f24666;
+        }
+
+        audio::-webkit-media-controls-play-button,
+        audio::-webkit-media-controls-volume-slider-container,
+        audio::-webkit-media-controls-timeline,
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display {
+            color: #ffffff;
+        }
+        @keyframes rotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+      }
+      
+      audio.rotate {
+          animation: rotate 2s infinite linear;
+      }
+
+      .default {
+        display: block;
+        text-align: center;
+        margin-bottom: auto;
+      }
+
+      .normal {
+          display: none;
+      }
+
+      .word {
+        display: block;
+        text-align: center;
+        margin-top: 270px;
+        color: #a17474;
+      }
+      
+      button {
+        background: url('giphy (3).gif') no-repeat center center; 
+        background-size: cover; /* 保持GIF图像比例 */
+        width: 200px; /* 设置按钮宽度 */
+        height: 120px; /* 设置按钮高度 */
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: auto;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px; /* 圆角 */
+        background-color: #ee897f; /* 按钮背景颜色 */
+        color: #fff; /* 文字颜色 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+      
+      button:hover {
+          background-color: #f24666; /* 鼠标悬停时的背景颜色 */
+          transform: scale(1.5); /* 按钮放大效果 */
+      }
+
+    </style>
+</head>
+<body>
+
+  <div class="default">
+    <audio controls>
+      <source src="/lao.mp3" type="audio/mp3"> 
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  
+  <div class="normal">
+    <audio controls>
+      <source src="/lao.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  
+  <p class="word">
+    找不到播放按钮？？
+    <br>
+    摸下小猫
+    <br>
+    让小猫帮你将一切恢复正常٩(˃̶͈̀௰˂̶͈́)و~~
+  </p>
+  <button onclick="toggleDivs()">
+  </button>
+  <p>
+    【- 胜利就在眼前 而你却看不到胜利!<br>
+多么的令人遗憾 匪军官狞笑地说 二排长面对高高举起的屠刀 他双眼喷火 目光带着微笑 把轻蔑的视线<br>
+投向刽子手 枪响了<br>
+- 哎 老师 老师 敌人抓住咱们几个人啊<br>
+- 他是单数还是复数？<br>
+- 我怎么觉得好象有三双眼睛望着敌人!<br>
+- 呵呵呵...<br>
+- 这只是一种修辞方法，表现了革命者既无畏 又愤怒 同时充满革命乐观主义<br>
+-哦 老师 那你能这么看我一眼吗？<br>
+呵呵呵...<br>
+- 马超同学 请你不要影响课堂纪律 有问题 可以下课后到办公室找我聊聊看嘛！<br>
+-我就是有一点好奇，不知道这三种眼神怎么一起使<br>
+- 有的同学就是爱显示自己 好象自己比谁都聪明 不要一瓶不满 半瓶子晃当 以为谁都不如你<br>
+这种自以为是的态度 老师最不喜欢<br>
+这种人啊 将来也没什么出息<br>
+- 哎 到底谁一瓶不满 半瓶子晃当 最爱显示自己啊<br>
+- 你不愿意听讲 可以出去啊！<br>
+- 不出去 我也不爱听讲！<br>
+- 我现在请你出去<br>
+- 恩 我有权坐在课堂里我交了学费啦】<br>
+<br>
+吆 想让我尊重你<br>
+你得先学会尊重别人<br>
+冤枉我的事我他妈永远不能承认<br>
+没收我的东西我tmd不要了<br>
+跟别的都没事 我跟你只有仇恨<br>
+你丫上课忘了词就说是让我气的<br>
+你扔了我的书包我永远记得<br>
+对你有偏见是因为我没换过座位<br>
+一年四季挨着垃圾桶说话能不脏么<br>
+黑板上的裂缝就是我砸得<br>
+你喝的每口水里TM都有我的吐沫<br>
+成天没事干就会趴小窗户偷看<br>
+我就盼你揪我出去然后让我滚蛋<br>
+找不着凶手B事都往我头上安<br>
+一年攒了一堆检查还给我处分通知单<br>
+你说你为人师表出学校们就随地吐痰<br>
+就会舔这个B脸<br>
+给我爸打电话<br>
+不要脸<br>
+无能的表现<br>
+你要什么都行 别碰我CD机<br>
+你妈了个b<br>
+我就上课听歌我乐意恩~ 吆<br>
+我就上语文课写数学作业<br>
+作业本上画个大鸡巴纯为了发泄<br>
+只有高年级小姐姐进入了我的视线<br>
+我才知道什么叫温柔和体贴<br>
+知道你是年纪组长给你留点面子<br>
+全办公室的老师都知道你丫是一个骗子<br>
+人家都座板凳你丫非得垫一垫子<br>
+明明开卷考试说我作弊撕了我的卷子<br>
+瞧你丫那操型<br>
+接着更年期
+跟我蛋逼
+回家操自己吧<br>
+操自己 恩~吆<br>
+我在学校外干的都是你丫不敢想的<br>
+上课两分钟我接个下茬堵了你的嗓子<br>
+我的作业从来不判 全他妈是2分<br>
+其实除了体育老师 都是 狗娘养的<br>
+当年马虎我的话现在全都还你<br>
+不是我小心眼<br>
+是你根本不讲理<br>
+我讲的段子当年全学校都流行<br>
+你说的笑话只能逗乐你自己<br>
+周末弄补习班就是为了骗钱吧<br>
+罚我站着听讲我就当锻炼身体<br>
+说我写的作文没味还不如放屁<br>
+跟流氓打架冲在前面是因为我讲义气<br>
+其实好多好老师值得你去学习<br>
+人家比你牛逼多了也没烦人不理<br>
+讲课就讲课别胡B<br>
+学生花钱上学不是来者看您抽疯发脾气<br>
+对我好的老师我发自内心的尊重<br>
+阴三代表所有同学向你们致敬<br>
+我听说你的了病
+更年期性骚动<br>
+我比你狠多了
+秽语综合症<br>
+咱俩都说中文说得也不是一水平<br>
+您都快被我气疯了<br>
+我还是那么冷静<br>
+你儿子托我爸找工作是吧<br>
+不可能 操 他是我爸<br>
+老陈他向着我恩~吆<br>
+记得<br>
+多管闲事多吃屁<br>
+少管闲事少拉稀<br>
+你丫这个变态<br>
+收礼的时候笑得很灿烂啊?<br>
+妈了个B 呀<br>
+都得死<br>
+  </p>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var audio = document.querySelector('audio');
+    audio.classList.add('rotate');
+  });
+  function toggleDivs() {
+    var defaultDiv = document.querySelector('.default');
+    var normalDiv = document.querySelector('.normal');
+    
+    // 切换显示和隐藏状态
+    if (defaultDiv.style.display === 'none') {
+        defaultDiv.style.display = 'block';
+        normalDiv.style.display = 'none';
+    } else {
+        defaultDiv.style.display = 'none';
+        normalDiv.style.display = 'block';
+    }
+  }
+
+</script>
+
+
+</body>
+</html>
