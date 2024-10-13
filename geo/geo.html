@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态获取用户当前位置</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .coordinates {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>当前位置（动态）</h1>
+    <p class="coordinates">纬度: <span id="latitude">加载中...</span></p>
+    <p class="coordinates">经度: <span id="longitude">加载中...</span></p>
+
+    <script>
+        // 检查浏览器是否支持Geolocation API
+        if (navigator.geolocation) {
+            // 使用watchPosition来持续监听位置变化
+            navigator.geolocation.watchPosition(
+                function(position) {
+                    // 获取到的经纬度数据
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+
+                    // 更新页面上的显示内容
+                    document.getElementById("latitude").textContent = latitude;
+                    document.getElementById("longitude").textContent = longitude;
+                },
+                function(error) {
+                    // 处理错误
+                    console.error("获取位置失败: " + error.message);
+                    document.getElementById("latitude").textContent = "无法获取";
+                    document.getElementById("longitude").textContent = "无法获取";
+                },
+                {
+                    enableHighAccuracy: true, // 提高精度
+                    timeout: 50,            // 设置获取位置的超时时间为5秒
+                    maximumAge: 0             // 不缓存位置信息，强制获取最新位置
+                }
+            );
+        } else {
+            // 如果浏览器不支持Geolocation
+            alert("浏览器不支持地理位置获取功能。");
+        }
+    </script>
+
+</body>
+</html>
